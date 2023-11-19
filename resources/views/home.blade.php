@@ -63,7 +63,8 @@
                                 <td>{{ $item->email }}</td>
                                 <td>
                                     <a href="{{ route('edit', $item->id) }}">Edit</a>
-                                    <a href="" onclick="return confirm('Are you sure?')">Delete</a>
+                                    <a href="{{ route('delete', $item->id) }}"
+                                        onclick="return confirm('Are you sure?')">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
