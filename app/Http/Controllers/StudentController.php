@@ -29,4 +29,25 @@ class StudentController extends Controller
 
         return redirect()->route('home')->with('success', 'Student data has been added');
     }
+
+    public function edit($id)
+    {
+        $student_single = Student::where('id', $id)->first();
+        return view('edit', compact('student_single'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $student = Student::where('id', $id)->first();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->update();
+
+        return redirect()->route('home')->with('success', 'Student data has been updated');
+    }
 }

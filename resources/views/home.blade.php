@@ -62,7 +62,7 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
-                                    <a href="">Edit</a>
+                                    <a href="{{ route('edit', $item->id) }}">Edit</a>
                                     <a href="" onclick="return confirm('Are you sure?')">Delete</a>
                                 </td>
                             </tr>
