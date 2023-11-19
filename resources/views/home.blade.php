@@ -48,15 +48,25 @@
                     <table class="table">
                         <thead>
                             <tr class="text-center">
+                                <th>Serial</th>
                                 <th>Student Name</th>
                                 <th>Student Email</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($all_students as $item)
                             <tr class="text-center">
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
+
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->name }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>
+                                    <a href="">Edit</a>
+                                    <a href="" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

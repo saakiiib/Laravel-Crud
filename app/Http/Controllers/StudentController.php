@@ -9,7 +9,8 @@ class StudentController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $all_students = Student::get();
+        return view('home', compact('all_students'));
     }
 
     public function store(Request $request)
