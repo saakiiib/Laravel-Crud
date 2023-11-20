@@ -22,7 +22,7 @@ class StudentController extends Controller
         ]);
 
         $ext = $request->file('photo')->extension();
-        $final_name = date('YmdHis').'.'.$ext;
+        $final_name = date('YmdHis') . '.' . $ext;
 
         $request->file('photo')->move(public_path('uploads/'), $final_name);
 
@@ -54,12 +54,12 @@ class StudentController extends Controller
             $request->validate([
                 'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             ]);
-            if (file_exists(public_path('uploads/'. $student->photo)) AND !empty($student->photo)) {
-            unlink(public_path('uploads/' . $student->photo));
+            if (file_exists(public_path('uploads/' . $student->photo)) and !empty($student->photo)) {
+                unlink(public_path('uploads/' . $student->photo));
             }
 
             $ext = $request->file('photo')->extension();
-            $final_name = date('YmdHis').'.'.$ext;
+            $final_name = date('YmdHis') . '.' . $ext;
 
             $request->file('photo')->move(public_path('uploads/'), $final_name);
 
@@ -76,6 +76,11 @@ class StudentController extends Controller
     public function delete($id)
     {
         $student = Student::where('id', $id)->first();
+
+        if (file_exists(public_path('uploads/' . $student->photo)) and !empty($student->photo)) {
+            unlink(public_path('uploads/' . $student->photo));
+        }
+
         $student->delete();
 
         return redirect()->back()->with('success', 'Student data has been deleted');
