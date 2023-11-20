@@ -17,11 +17,18 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'name' => 'required',
             'email' => 'required|email',
         ]);
 
+        $ext = $request->file('photo')->extension();
+        $final_name = date('YmdHis').'.'.$ext;
+
+        $request->file('photo')->move(public_path('uploads/'), $final_name);
+        
         $student = new Student();
+        $student->photo = $final_name;
         $student->name = $request->name;
         $student->email = $request->email;
         $student->save();

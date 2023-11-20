@@ -22,8 +22,15 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">Add Student</div>
-                    <form action="{{ route('store') }}" method="post" class="p-3">
+                    <form action="{{ route('store') }}" method="post" class="p-3" enctype="multipart/form-data">
                         @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Student Photo</label>
+                            <input type="file" class="form-control" name="photo">
+                            @error('photo')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Student Name</label>
                             <input type="text" class="form-control" name="name" value="{{ old('name') }}">
@@ -49,6 +56,7 @@
                         <thead>
                             <tr class="text-center">
                                 <th>Serial</th>
+                                <th>Student Photo</th>
                                 <th>Student Name</th>
                                 <th>Student Email</th>
                                 <th>Action</th>
@@ -59,6 +67,9 @@
                             <tr class="text-center">
 
                                 <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img class=" img-fluid" src="{{ asset('uploads/' .$item->photo) }}" alt="image">
+                                </td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>
