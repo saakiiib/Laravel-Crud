@@ -65,10 +65,9 @@
                         <tbody>
                             @foreach ($all_students as $item)
                             <tr class="text-center">
-
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
-                                    <img class=" img-fluid" src="{{ asset('uploads/' .$item->photo) }}" alt="image">
+                                    <img class="img-fluid" src="{{ asset('uploads/' .$item->photo) }}" alt="image">
                                 </td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>

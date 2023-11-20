@@ -18,8 +18,24 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">Edit Student</div>
-                    <form action="{{ route('update', $student_single->id) }}" method="post" class="p-3">
+                    <form action="{{ route('update', $student_single->id) }}" method="post"
+                        enctype="multipart/form-data" class="p-3">
                         @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Existing Photo
+                            </label>
+                            <img class="img-fluid" src="{{ asset('uploads/'. $student_single->photo) }}" alt="">
+                            @error('photo')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Upload Photo</label>
+                            <input type="file" class="form-control" name="photo">
+                            @error('name')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <div class="mb-3">
                             <label class="form-label">Student Name</label>
                             <input type="text" class="form-control" name="name" value="{{ $student_single->name }}">
